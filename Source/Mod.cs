@@ -1,5 +1,6 @@
 using HarmonyLib;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 
 namespace FixesAndTweaks
 {
@@ -9,6 +10,7 @@ namespace FixesAndTweaks
         {
             base.OnLoad( harmony );
             PUtil.InitLibrary( false );
+            new POptions().RegisterOptions( this, typeof( Options ));
         }
     }
 }
