@@ -13,13 +13,15 @@ namespace FixesAndTweaks
         [HarmonyPatch(nameof(CreateRocketBuildingDef))]
         public static void CreateRocketBuildingDef(BuildingDef def)
         {
-            def.Breakable = false;
+            if( def.Invincible )
+                def.Breakable = false;
         }
         [HarmonyPostfix]
         [HarmonyPatch(nameof(CreateMonumentBuildingDef))]
         public static void CreateMonumentBuildingDef(BuildingDef def)
         {
-            def.Breakable = false;
+            if( def.Invincible )
+                def.Breakable = false;
         }
     }
 }
