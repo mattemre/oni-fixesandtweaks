@@ -17,10 +17,19 @@ namespace FixesAndTweaks
         [JsonProperty]
         public bool ReducedStarvationWarning { get; set; } = true;
 
+        [Option("Planted Diagnostic Only If Farms", "'Check farms are planted' diagnostic triggers only if there are farm plots.")]
+        [JsonProperty]
+        public bool PlantedDiagnosticOnlyIfFarms { get; set; } = true;
+
+        [Option("Block Has Farms Diagnostic", "Disable 'Check colony has farms' diagnostic.")]
+        [JsonProperty]
+        public bool BlockHasFarmsDiagnostic { get; set; } = true;
+
         public override string ToString()
         {
-            return string.Format("DeliveryTemperatureLimit.Options[fasterhorizontalscrolling={0},reducedstarvationwarning={1}]",
-                FasterHorizontalScrolling, ReducedStarvationWarning);
+            return string.Format("DeliveryTemperatureLimit.Options[fasterhorizontalscrolling={0},reducedstarvationwarning={1},"
+                + "planteddiagnosticonlyiffarms={2}, blockhasfarmsdiagnostic={3}]",
+                FasterHorizontalScrolling, ReducedStarvationWarning, PlantedDiagnosticOnlyIfFarms, BlockHasFarmsDiagnostic);
         }
     }
 }
