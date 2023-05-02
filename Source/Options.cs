@@ -21,6 +21,7 @@ namespace FixesAndTweaks
         [Option("Reduced Radiation Diagnostic", "If a duplicant is exposed to strong radiation but has not yet received"
             + "a significant amount of radiation, the 'Check exposed' diagnostic is suppressed.")]
         [JsonProperty]
+        [RequireDLC(DlcManager.EXPANSION1_ID)]
         public bool ReducedRadiationDiagnostic { get; set; } = true;
 
         [Option("Planted Diagnostic Only If Farms", "'Check farms are planted' diagnostic triggers only if there are farm plots.")]
