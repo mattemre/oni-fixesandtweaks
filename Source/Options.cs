@@ -1,13 +1,13 @@
 using PeterHan.PLib.Options;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace FixesAndTweaks
 {
     [JsonObject(MemberSerialization.OptIn)]
     [ModInfo("https://github.com/llunak/oni-fixesandtweaks")]
     [ConfigFile(SharedConfigLocation: true)]
-    [RestartRequired]  // radiation diagnostic does conditional patching
-    public sealed class Options : SingletonOptions< Options >
+    public sealed class Options : SingletonOptions< Options >, IOptions
     {
         [Option("Faster Horizontal Scrolling", "Makes horizontal scrolling in views such as the 'Consumables' one faster.")]
         [JsonProperty]
@@ -38,6 +38,18 @@ namespace FixesAndTweaks
                 + "reducedradiationdiagnostic={2},planteddiagnosticonlyiffarms={3}, blockhasfarmsdiagnostic={4}]",
                 FasterHorizontalScrolling, ReducedStarvationWarning, ReducedRadiationDiagnostic,
                 PlantedDiagnosticOnlyIfFarms, BlockHasFarmsDiagnostic);
+        }
+
+        public void OnOptionsChanged()
+        {
+            // 'this' is the Options instance used by the options dialog, so set up
+            // the actual instance used by the mod. MemberwiseClone() is enough to copy non-reference data.
+            Instance = (Options) this.MemberwiseClone();
+        }
+
+        public IEnumerable<IOptionsEntry> CreateOptions()
+        {
+            return null;
         }
     }
 }
