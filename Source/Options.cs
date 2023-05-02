@@ -6,6 +6,7 @@ namespace FixesAndTweaks
     [JsonObject(MemberSerialization.OptIn)]
     [ModInfo("https://github.com/llunak/oni-fixesandtweaks")]
     [ConfigFile(SharedConfigLocation: true)]
+    [RestartRequired]  // radiation diagnostic does conditional patching
     public sealed class Options : SingletonOptions< Options >
     {
         [Option("Faster Horizontal Scrolling", "Makes horizontal scrolling in views such as the 'Consumables' one faster.")]
@@ -16,6 +17,11 @@ namespace FixesAndTweaks
             +" and still has at least 800 kcal, the 'Starvation' warning is not shown.")]
         [JsonProperty]
         public bool ReducedStarvationWarning { get; set; } = true;
+
+        [Option("Reduced Radiation Diagnostic", "If a duplicant is exposed to strong radiation but has not yet received"
+            + "a significant amount of radiation, the 'Check exposed' diagnostic is suppressed.")]
+        [JsonProperty]
+        public bool ReducedRadiationDiagnostic { get; set; } = true;
 
         [Option("Planted Diagnostic Only If Farms", "'Check farms are planted' diagnostic triggers only if there are farm plots.")]
         [JsonProperty]
@@ -28,8 +34,9 @@ namespace FixesAndTweaks
         public override string ToString()
         {
             return string.Format("DeliveryTemperatureLimit.Options[fasterhorizontalscrolling={0},reducedstarvationwarning={1},"
-                + "planteddiagnosticonlyiffarms={2}, blockhasfarmsdiagnostic={3}]",
-                FasterHorizontalScrolling, ReducedStarvationWarning, PlantedDiagnosticOnlyIfFarms, BlockHasFarmsDiagnostic);
+                + "reducedradiationdiagnostic={2},planteddiagnosticonlyiffarms={3}, blockhasfarmsdiagnostic={4}]",
+                FasterHorizontalScrolling, ReducedStarvationWarning, ReducedRadiationDiagnostic,
+                PlantedDiagnosticOnlyIfFarms, BlockHasFarmsDiagnostic);
         }
     }
 }
