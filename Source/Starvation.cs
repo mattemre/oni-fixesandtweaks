@@ -31,7 +31,9 @@ namespace FixesAndTweaks
             Func< Chore, bool > isAllowedChore = ( Chore chore ) =>
             {
                 return chore.choreType.urge == Db.Get().Urges.Pee
-                    || chore.choreType.urge == Db.Get().Urges.RecoverBreath;
+                    || chore.choreType.urge == Db.Get().Urges.RecoverBreath
+                    || chore.choreType.urge == Db.Get().Urges.Emote
+                    || chore.choreType.urge == Db.Get().Urges.EmoteHighPriority;
             };
             ChoreDriver choreDriver = __instance.master.GetComponent<ChoreDriver>();
             if (choreDriver.HasChore() && !isAllowedChore( choreDriver.GetCurrentChore()))
